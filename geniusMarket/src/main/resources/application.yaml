@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/spring?useSSL=false&serverTimezone=Hongkong&characterEncoding=utf-8&autoReconnect=true
+    url: jdbc:mysql://121.41.25.13:7894/geniusMrket?useSSL=false&serverTimezone=Hongkong&characterEncoding=utf-8&autoReconnect=true
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: wu010602
+    username: geniusMrket
+    password: geniusMrket12345
 mybatis:
   mapper-locations: classpath*:com/example/geniusmarket/mapper/*.xml
   type-aliases-package: com.example.geniusmarket.pojo
