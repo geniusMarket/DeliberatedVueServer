@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.AnnotationMapper">
+
+    <insert id="insertAnnotationByObject" parameterType="com.example.geniusmarket.pojo.Annotation" useGeneratedKeys="true"  keyProperty="annotationId">
+        insert into  `annotation` values (null,#{filePath},#{moduleName},#{detail},#{createTime},
+                                          #{userId},#{likes},#{status})
+    </insert>
+    <select id="selectAnnotationById" parameterType="int" resultMap="Annotation">
+        select * from `annotation` where annotationId=#{id}
+    </select>
+    <select id="selectAnnotationsByString" parameterType="string" resultMap="Annotation">
+        select * from `annotation` where detail like "%"#{str}"%"
+    </select>
+    <update id="updateAnnotationByObject" parameterType="com.example.geniusmarket.pojo.Annotation">
+        update `annotation` set filePath=#{filePath},moduleName=#{moduleName},detail=#{detail},
+                                likes=#{likes},status=#{status} where annotationId=#{annotationId}
+    </update>
+    <delete id="deleteAnnotationById" parameterType="int">
+        delete from `annotation` where annotationId=#{id}
+    </delete>
+    <resultMap id="Annotation" type="com.example.geniusmarket.pojo.Annotation">
+        <result property="annotationId" column="annotationId"/>
+        <result property="filePath" column="filePath"/>
+        <result property="moduleName" column="moduleName"/>
+        <result property="detail" column="detail"/>
+        <result property="createTime" column="createTime"/>
+        <result property="userId" column="userId"/>
+        <result property="likes" column="likes"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>

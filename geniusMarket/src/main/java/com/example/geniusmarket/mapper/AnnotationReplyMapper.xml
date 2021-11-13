@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.AnnotationReplyMapper">
+    <insert id="insertAnnotationReplyByObject" parameterType="com.example.geniusmarket.pojo.AnnotationReply" useGeneratedKeys="true" keyProperty="replyId">
+        insert into `annotationReply` values (null,#{userId},#{annotationId},#{detail},#{createTime},
+                                              #{likes},#{status})
+    </insert>
+    <select id="selectAnnotationReplyById" parameterType="int" resultMap="Reply">
+        select * from `annotationReply` where replyId=#{id}
+    </select>
+    <select id="selectAnnotationsReplyByString" parameterType="string" resultMap="Reply">
+        select * from `annotationReply` where detail like "%"#{str}"%"
+    </select>
+    <update id="updateAnnotationReplyByObject" parameterType="com.example.geniusmarket.pojo.AnnotationReply">
+        update `annotationReply` set detail=#{deatil},likes=#{likes},status=#{status}
+                    where replyId=#{replyId}
+    </update>
+    <delete id="deleteAnnotationReplyById" parameterType="int">
+        delete from `annotationReply` where replyId=#{id}
+    </delete>
+    <resultMap id="Reply" type="com.example.geniusmarket.pojo.AnnotationReply">
+        <result property="replyId" column="replyId"/>
+        <result property="userId" column="userId"/>
+        <result property="annotationId" column="annotationId"/>
+        <result property="detail" column="detail"/>
+        <result property="createTime" column="createTime"/>
+        <result property="likes" column="likes"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>

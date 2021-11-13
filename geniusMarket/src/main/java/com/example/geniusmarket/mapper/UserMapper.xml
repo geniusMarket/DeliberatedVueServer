@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.UserMapper">
+    <insert id="insertUserByObject" parameterType="com.example.geniusmarket.pojo.User">
+        insert into `user` values(#{openId},#{userInfo},#{score},#{fans},#{attention})
+    </insert>
+    <select id="selectUserByOpenId"  parameterType="string" resultMap="User">
+        select * from  `user` where openid = #{openId}
+    </select>
+    <select id="selectFansByOpenId" parameterType="string" resultMap="User">
+        select * from `user` where  openId in (select fansId from fans where attentionId=#{openId})
+    </select>
+    <select id="selectAttentionsByOpenId" parameterType="string" resultMap="User">
+        select * from `user` where openId in (select attentionId from fansId=#{openId})
+    </select>
+    <update id="updateUserByObject" parameterType="com.example.geniusmarket.pojo.User">
+        update `user` set userInfo = #{userInfo}, attention =#{attention},score=#{score},
+                        fans =#{fans} where openId = #{openId}
+    </update>
+    <delete id="deleteUserByOpenId" parameterType="string">
+        delete from  `user` where openId = #{openId}
+    </delete>
+    <resultMap id="User" type="com.example.geniusmarket.pojo.User">
+        <result property="openId" column="openId"/>
+        <result property="userInfo" column="userInfo"/>
+        <result property="attention" column="attention"/>
+        <result property="score" column="score"/>
+        <result property="fans" column="fans"/>
+    </resultMap>
+</mapper>

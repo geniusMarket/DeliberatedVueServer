@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.SourceCodeMapper">
+    <select id="selectSourceCodeById" parameterType="int" resultMap="SourceCode">
+        select * from `sourceCode` where codeId=#{id}
+    </select>
+    <select id="selectSourceCodeByPath" parameterType="string" resultMap="SourceCode">
+        select * from `sourceCode` where filePath=#{path}
+    </select>
+    <resultMap id="SourceCode" type="com.example.geniusmarket.pojo.SourceCode" >
+        <result property="codeId" column="codeId"/>
+        <result property="code" column="code"/>
+        <result property="filePath" column="filePath"/>
+        <result property="moduleName" column="moduleName"/>
+    </resultMap>
+</mapper>

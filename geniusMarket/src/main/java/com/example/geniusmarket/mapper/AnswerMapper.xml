@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.AnswerMapper">
+    <insert id="insertAnswerByObject" parameterType="com.example.geniusmarket.pojo.Answer" useGeneratedKeys="true" keyProperty="answerId">
+        insert  into `answer` values (null,#{answerer},#{questionId},#{detail},#{createTime},
+                                      #{likes},#{reward},#{status})
+    </insert>
+    <select id="selectAnswerById" parameterType="int" resultMap="Answer">
+        select * from `answer` where answerId=#{id}
+    </select>
+    <select id="selectAnswersByString" parameterType="string" resultMap="Answer">
+        select * from `answer` where detail like "%"#{str}"%"
+    </select>
+    <update id="updateAnswerByObject" parameterType="com.example.geniusmarket.pojo.Answer">
+        update `anser` set detail=#{detail},likes=#{likes},reward=#{reward},status=#{status}
+                        where answerId=#{answerId}
+    </update>
+    <delete id="deleteAnswerById" parameterType="int">
+        delete from `answer` where answerId=#{id}
+    </delete>
+    <resultMap id="Answer" type="com.example.geniusmarket.pojo.Answer">
+        <result property="answerId" column="answerId"/>
+        <result property="answerer" column="answerer"/>
+        <result property="questionId" column="questionId"/>
+        <result property="detail" column="detail"/>
+        <result property="createTime" column="createTime"/>
+        <result property="likes" column="likes"/>
+        <result property="reward" column="reward"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>

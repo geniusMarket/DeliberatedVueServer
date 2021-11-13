@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.HistoryMapper">
+    <insert id="insertHistoryByObject" parameterType="com.example.geniusmarket.pojo.History" >
+        insert into `history` values (#{userId},#{questionId},#{createTime})
+    </insert>
+    <select id="selectHistoryByOpenId" parameterType="com.example.geniusmarket.pojo.History" resultMap="History">
+        select * from `history` where userId=#{userId}
+    </select>
+    <resultMap id="History" type="com.example.geniusmarket.pojo.History">
+        <result property="questionId" column="questionId"/>
+        <result property="userId" column="userId"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+</mapper>

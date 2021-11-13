@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.FavoriteMapper">
+    <insert id="insertFavoriteByObject" parameterType="com.example.geniusmarket.pojo.Favorite">
+        insert into `favorite` values (#{userid},#{questionId})
+    </insert>
+    <select id="selectFavoritesByOpenId" parameterType="string" resultMap="Favorite">
+        select * from  `favorite` where  `userId`=#{openId}
+    </select>
+    <delete id="deleteFavoriteByObject" parameterType="com.example.geniusmarket.pojo.Favorite">
+        delete from `favorite` where `userId`=#{userId} and `questionId`=#{questionId}
+    </delete>
+    <resultMap id="Favorite" type="com.example.geniusmarket.pojo.Favorite">
+        <result property="userId" column="userId"/>
+        <result property="questionId" column="questionId"/>
+    </resultMap>
+</mapper>

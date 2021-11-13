@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.QuestionMapper">
+    <insert id="insertQuestionByObject" parameterType="com.example.geniusmarket.pojo.Question" useGeneratedKeys="true" keyProperty="questionId">
+        insert into `question` values (null,#{asker},#{title},#{detail},#{codeId},
+                                       #{views},#{likes},#{reward},#{createTime},#{status})
+    </insert>
+    <update id="updateQuestionByObject" parameterType="com.example.geniusmarket.pojo.Question">
+        update `question` set asker=#{asker},title=#{title},detail=#{detail},codeId=#{codeId},
+                              views={views},likes=#{likes},reward=#{reward},status=#{status}
+                                where questionId=#{questionId}
+    </update>
+    <select id="selectQuestionById" parameterType="int" resultMap="Question">
+        select * from `question` where questionId=#{id}
+    </select>
+    <select id="selectQuestionsByString" parameterType="string" resultMap="Question">
+        select * from Question where title like "%"#{title}"%" or detail like "%"#{title}"%"
+    </select>
+    <delete id="deleteQuestionById" parameterType="int">
+        delete from `Question` where questionId =#{id}
+    </delete>
+    <resultMap id="Question" type="com.example.geniusmarket.pojo.Question">
+        <result property="questionId" column="questionId"/>
+        <result property="asker" column="asker"/>
+        <result property="title" column="title"/>
+        <result property="detail" column="detail"/>
+        <result property="codeId" column="codeId"/>
+        <result property="views" column="views"/>
+        <result property="likes" column="likes"/>
+        <result property="reward" column="reward"/>
+        <result property="createTime" column="createTime"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>

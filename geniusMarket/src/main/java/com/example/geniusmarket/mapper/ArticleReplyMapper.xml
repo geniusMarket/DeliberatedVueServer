@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.ArticleReplyMapper">
+    <insert id="insertArticleReplyByObject" parameterType="com.example.geniusmarket.pojo.ArticleReply" useGeneratedKeys="true" keyProperty="articleReplyId">
+        insert into `articleReply` values (null,#{articleId},#{replier},#{datail},#{createTime},
+                                           #{views},#{likes},#{status})
+    </insert>
+    <select id="selectArticleReplysByArticleId" parameterType="int" resultMap="Reply">
+        select * from `articleReply` where articleId=#{articleId}
+    </select>
+    <update id="updateArticleReplyByObject" parameterType="com.example.geniusmarket.pojo.ArticleReply">
+        update `articleReply` set replier=#{replier},detail=#{detail},views=#{views},likes=#{likes},status=#{status}
+                                where articleReplyId=#{articleReplyId}
+    </update>
+    <delete id="deleteArticleReplyById" parameterType="int">
+        delete from `articleReply` where articleReplyId=#{id}
+    </delete>
+    <resultMap id="Reply" type="com.example.geniusmarket.pojo.ArticleReply">
+        <result property="articleReplyId" column="articleReply"/>
+        <result property="articleId" column="articleId"/>
+        <result property="replier" column="replier"/>
+        <result property="detail" column="detail"/>
+        <result property="createTime" column="createTime/"/>
+        <result property="views" column="views"/>
+        <result property="likes" column="likes"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>
