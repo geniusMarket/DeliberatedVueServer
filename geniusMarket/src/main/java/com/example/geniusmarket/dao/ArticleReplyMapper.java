@@ -24,6 +24,11 @@ public interface ArticleReplyMapper {
 
     /**
      *
+     * @param replyId
+     */
+    void addLikes(int replyId);
+    /**
+     *
      * @param articleReply
      */
     void updateArticleReplyByObject(ArticleReply articleReply);

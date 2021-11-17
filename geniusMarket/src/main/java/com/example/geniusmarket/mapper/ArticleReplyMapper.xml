@@ -17,6 +17,9 @@
     <delete id="deleteArticleReplyById" parameterType="int">
         delete from `articleReply` where articleReplyId=#{id}
     </delete>
+    <update id="addLikes" parameterType="int">
+        update `articleReply` set likes = likes+1 where  articleReplyId = #{replyId}
+    </update>
     <resultMap id="Reply" type="com.example.geniusmarket.pojo.ArticleReply">
         <result property="articleReplyId" column="articleReply"/>
         <result property="articleId" column="articleId"/>
