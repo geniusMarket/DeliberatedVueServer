@@ -16,7 +16,7 @@ public class ArticleReply {
     private int views=0;
     private int likes=0;
     private int status=EXAMINING;
-    public ArticleReply()
+    public ArticleReply(int articleID, int articleReplyID, String detail, String replier)
     {
         this.createTime = new Timestamp(new Date().getTime());
     }
