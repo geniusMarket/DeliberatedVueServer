@@ -45,17 +45,13 @@ public class ArticleReplyController {
         try
         {
             var articleReplyId = myData.getIntValue("articleReplyId");
-            var articleReply = articleReplyMapper.addLikes(articleReplyId);
-            articleReply.setLikes(articleReply.getLikes()+1);
-            articleReplyMapper.updateArticleReplyByObject(articleReply);
-            status.put("data",articleReply);
+            articleReplyMapper.addLikes(articleReplyId);
             return (JSONObject) JSONObject.toJSON(status);
         }
         catch (Exception e)
         {
             e.printStackTrace();
             status.replace("status","error");
-            status.put("data",null);
             return (JSONObject) JSONObject.toJSON(status);
         }
     }
