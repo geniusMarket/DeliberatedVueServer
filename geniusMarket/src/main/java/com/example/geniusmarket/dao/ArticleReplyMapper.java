@@ -24,6 +24,18 @@ public interface ArticleReplyMapper {
 
     /**
      *
+     * @param status
+     * @return
+     */
+    List<ArticleReply> selectArticleRepliesByStatus(int status);
+    /**
+     *
+     * @param id
+     * @return
+     */
+    ArticleReply selectArticleReplyById(int id);
+    /**
+     *
      * @param replyId
      */
     void addLikes(int replyId);

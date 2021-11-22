@@ -37,6 +37,18 @@ public interface QuestionMapper {
 
     /**
      *
+     * @param status
+     * @return
+     */
+    List<Question> selectQuestionByStatus(int status);
+    /**
+     *
+     * @param openId
+     * @return
+     */
+   List<Question> selectQuestionByAsker(String openId);
+    /**
+     *
      * @param id
      */
    void deleteQuestionById(int id);

@@ -24,11 +24,16 @@ public interface AnnotationReplyMapper {
 
     /**
      *
-     * @param str
+     * @param id
      * @return
      */
-    List<AnnotationReply> selectAnnotationsReplyByString(String str);
+    List<AnnotationReply> selectAnnotationsReplyByAnoId(int id);
 
+    /**
+     * @param status
+     * @return
+     */
+    List<AnnotationReply> selectAnnotationsReplyByStatus(int status);
     /**
      *
      * @param annotationReply

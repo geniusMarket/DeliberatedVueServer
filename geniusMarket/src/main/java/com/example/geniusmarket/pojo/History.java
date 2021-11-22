@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
-public class History {
+public class History implements Cloneable{
     private String userId;
     private  int questionId;
     private Timestamp createTime;
@@ -59,5 +59,19 @@ public class History {
                 ", questionId=" + questionId +
                 ", createTime=" + createTime +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        History history = null;
+        try
+        {
+            history = (History) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return  history;
     }
 }

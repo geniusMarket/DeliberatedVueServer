@@ -8,14 +8,23 @@
                                       #{likes},#{reward},#{status})
     </insert>
     <select id="selectAnswerById" parameterType="int" resultMap="Answer">
-        select * from `answer` where answerId=#{id}
+        select * from `answer` where answerId=#{id} and status = 1
     </select>
     <select id="selectAnswersByString" parameterType="string" resultMap="Answer">
-        select * from `answer` where detail like "%"#{str}"%"
+        select * from `answer` where detail like "%"#{str}"%" and status = 1
+    </select>
+    <select id="selectAnswerInQuestion" parameterType="int" resultMap="Answer">
+        select * from `answer` where questionId =#{questionId} and status = 1
+    </select>
+    <select id="selectAnswerByStatus" parameterType="int" resultMap="Answer">
+        select * from `answer` where `status` = #{status}
     </select>
     <update id="updateAnswerByObject" parameterType="com.example.geniusmarket.pojo.Answer">
-        update `anser` set detail=#{detail},likes=#{likes},reward=#{reward},status=#{status}
+        update `answer` set detail=#{detail},likes=#{likes},reward=#{reward},status=#{status}
                         where answerId=#{answerId}
+    </update>
+    <update id="addAnswerLikes" parameterType="int">
+        update `answer` set likes =likes +1 where answerId=#{answerId}
     </update>
     <delete id="deleteAnswerById" parameterType="int">
         delete from `answer` where answerId=#{id}

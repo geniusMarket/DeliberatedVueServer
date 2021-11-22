@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
-public class AnswerReply {
+public class AnswerReply implements Cloneable{
     public final static int EXAMINING = 0; //审核中
     public final static int EXAMINE_SUCCESS = 1;//审核成功
     public final static int EXAMINE_FAILED = 2;//审核失败
@@ -125,5 +125,19 @@ public class AnswerReply {
                 ", status=" + status +
                 ", createTime=" + createTime +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        AnnotationReply annotationReply = null;
+        try
+        {
+            annotationReply = (AnnotationReply) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return  annotationReply;
     }
 }

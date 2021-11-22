@@ -8,7 +8,13 @@
                                            #{views},#{likes},#{status})
     </insert>
     <select id="selectArticleReplysByArticleId" parameterType="int" resultMap="Reply">
-        select * from `articleReply` where articleId=#{articleId}
+        select * from `articleReply` where articleId=#{articleId} and status = 1
+    </select>
+    <select id="selectArticleRepliesByStatus" parameterType="int" resultMap="Reply">
+        select * from `articleReply` where  status = #{status}
+    </select>
+    <select id="selectArticleReplyById" parameterType="int" resultMap="Reply">
+        select  * from `articleReply` where articleReplyId=#{id}
     </select>
     <update id="updateArticleReplyByObject" parameterType="com.example.geniusmarket.pojo.ArticleReply">
         update `articleReply` set replier=#{replier},detail=#{detail},views=#{views},likes=#{likes},status=#{status}

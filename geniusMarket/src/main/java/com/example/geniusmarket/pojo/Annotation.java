@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
-public class Annotation {
+public class Annotation implements Cloneable{
     public final static int EXAMINING = 0; //审核中
     public final static int EXAMINE_SUCCESS = 1;//审核成功
     public final static int EXAMINE_FAILED = 2;//审核失败
@@ -137,5 +137,19 @@ public class Annotation {
                 ", likes=" + likes +
                 ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Annotation annotation = null;
+        try {
+            annotation =(Annotation) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+
+        }
+        return annotation;
     }
 }

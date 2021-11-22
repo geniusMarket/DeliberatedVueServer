@@ -2,7 +2,7 @@ package com.example.geniusmarket.pojo;
 
 import java.util.Objects;
 
-public class User {
+public class User implements Cloneable{
     private String openId;
     private String userInfo;
     private int score = 0;
@@ -82,5 +82,18 @@ public class User {
                 ", fans=" + fans +
                 ", attention=" + attention +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        User user = null;
+        try {
+            user = (User) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return  user;
     }
 }

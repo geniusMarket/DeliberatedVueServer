@@ -9,6 +9,9 @@
     <delete id="deleteFansByObject" parameterType="com.example.geniusmarket.pojo.Fans">
         delete from fans where fansId=#{fanId} and  attentionId=#{attentionId}
     </delete>
+    <select id="selectFans" parameterType="string" resultMap="Fans">
+        select * from `fans` where userId = #{openId}
+    </select>
     <resultMap id="Fans" type="com.example.geniusmarket.pojo.Fans">
         <result property="fanId" column="fansId"/>
         <result property="attentionId" column="attentionId"/>

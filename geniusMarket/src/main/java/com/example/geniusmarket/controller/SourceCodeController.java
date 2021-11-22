@@ -6,6 +6,7 @@ import com.example.geniusmarket.dao.SourceCodeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -52,5 +53,10 @@ public class SourceCodeController {
             status.replace("status","error");
             return (JSONObject) JSON.toJSON(status);
         }
+    }
+    @RequestMapping("/test")
+    public String test()
+    {
+        return  "https!";
     }
 }

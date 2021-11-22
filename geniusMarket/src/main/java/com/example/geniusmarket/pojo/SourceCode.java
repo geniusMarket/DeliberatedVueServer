@@ -2,7 +2,7 @@ package com.example.geniusmarket.pojo;
 
 import java.util.Objects;
 
-public class SourceCode {
+public class SourceCode implements Cloneable{
     private  int codeId;
     private  String filePath;
     private String moduleName;
@@ -69,5 +69,18 @@ public class SourceCode {
                 ", moduleName='" + moduleName + '\'' +
                 ", code='" + code + '\'' +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        SourceCode sourceCode = null;
+        try {
+            sourceCode = (SourceCode) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return  sourceCode;
     }
 }

@@ -2,7 +2,7 @@ package com.example.geniusmarket.pojo;
 
 import java.util.Objects;
 
-public class Fans {
+public class Fans implements Cloneable{
     private String fanId;
     private String attentionId;
 
@@ -47,5 +47,20 @@ public class Fans {
                 "fanId='" + fanId + '\'' +
                 ", attentionId='" + attentionId + '\'' +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Fans fans = null;
+        try
+        {
+           fans = (Fans) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return  fans;
+
     }
 }

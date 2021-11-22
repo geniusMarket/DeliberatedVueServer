@@ -9,10 +9,16 @@
                                           #{userId},#{likes},#{status})
     </insert>
     <select id="selectAnnotationById" parameterType="int" resultMap="Annotation">
-        select * from `annotation` where annotationId=#{id}
+        select * from `annotation` where annotationId=#{id} and status = 1
     </select>
-    <select id="selectAnnotationsByString" parameterType="string" resultMap="Annotation">
-        select * from `annotation` where detail like "%"#{str}"%"
+    <select id="selectAllAnnotation" resultMap="Annotation">
+        select * from `annotation` where  status = 1
+    </select>
+    <select id="selectAnnotationBy" parameterType="string" resultMap="Annotation">
+        select * from `annotation` where `moduleName`=#{moduleName} and status = 1
+    </select>
+    <select id="selectAnnotationByStatus" parameterType="int" resultMap="Annotation">
+        select * from `annotation` where `status` = #{status}
     </select>
     <update id="updateAnnotationByObject" parameterType="com.example.geniusmarket.pojo.Annotation">
         update `annotation` set filePath=#{filePath},moduleName=#{moduleName},detail=#{detail},

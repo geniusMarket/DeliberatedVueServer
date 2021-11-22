@@ -2,7 +2,7 @@ package com.example.geniusmarket.pojo;
 
 import java.util.Objects;
 
-public class Favorite {
+public class Favorite implements Cloneable{
     private String userId;
     private int questionId;
     Favorite(){}
@@ -47,5 +47,19 @@ public class Favorite {
                 "userId='" + userId + '\'' +
                 ", questionId=" + questionId +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Favorite favorite = null;
+        try
+        {
+            favorite = (Favorite) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return favorite;
     }
 }

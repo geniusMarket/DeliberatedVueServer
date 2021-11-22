@@ -8,10 +8,13 @@
                                               #{likes},#{status})
     </insert>
     <select id="selectAnnotationReplyById" parameterType="int" resultMap="Reply">
-        select * from `annotationReply` where replyId=#{id}
+        select * from `annotationReply` where replyId=#{id} and status = 1
     </select>
-    <select id="selectAnnotationsReplyByString" parameterType="string" resultMap="Reply">
-        select * from `annotationReply` where detail like "%"#{str}"%"
+    <select id="selectAnnotationsReplyByAnoId" parameterType="int" resultMap="Reply">
+        select * from `annotationReply` where annotationId = #{id} and status = 1
+    </select>
+    <select id="selectAnnotationsReplyByStatus" parameterType="int" resultMap="Reply">
+        select * from `annotationReply` where status = #{status}
     </select>
     <update id="updateAnnotationReplyByObject" parameterType="com.example.geniusmarket.pojo.AnnotationReply">
         update `annotationReply` set detail=#{deatil},likes=#{likes},status=#{status}

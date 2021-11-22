@@ -31,10 +31,26 @@ public interface AnswerMapper {
 
     /**
      *
+     * @param questionId
+     * @return
+     */
+    List<Answer> selectAnswerInQuestion(int questionId);
+
+    /**
+     * @param status
+     * @return
+     */
+    List<Answer> selectAnswerByStatus(int status);
+    /**
+     *
      * @param answer
      */
     void updateAnswerByObject(Answer answer);
 
+    /**
+     *
+     */
+    void addAnswerLikes(int answerId);
     /**
      *
      * @param id

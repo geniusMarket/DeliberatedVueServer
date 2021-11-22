@@ -38,6 +38,12 @@ public interface AnswerReplyMapper {
 
     /**
      *
+     * @param status
+     * @return
+     */
+    List<AnswerReply> selectAnswerRepliesByStatus(int status);
+    /**
+     *
      * @param answerReply
      */
     void updateAnswerReplyByObject(AnswerReply answerReply);

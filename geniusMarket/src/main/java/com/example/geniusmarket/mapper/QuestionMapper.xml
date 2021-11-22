@@ -13,14 +13,20 @@
                                 where questionId=#{questionId}
     </update>
     <select id="selectQuestionById" parameterType="int" resultMap="Question">
-        select * from `question` where questionId=#{id}
+        select * from `question` where questionId=#{id} and status = 1
     </select>
     <select id="selectQuestionsByString" parameterType="string" resultMap="Question">
-        select * from Question where title like "%"#{title}"%" or detail like "%"#{title}"%"
+        select * from Question where title like "%"#{title}"%" or detail like "%"#{title}"%" and status = 1
     </select>
     <delete id="deleteQuestionById" parameterType="int">
         delete from `Question` where questionId =#{id}
     </delete>
+    <select id="selectQuestionByAsker" parameterType="string" resultMap="Question">
+        select  * from `question` where asker = #{openId} and status = 1
+    </select>
+    <select id="selectQuestionByStatus" parameterType="int" resultMap="Question">
+        select  * from `question` where status = #{status}
+    </select>
     <resultMap id="Question" type="com.example.geniusmarket.pojo.Question">
         <result property="questionId" column="questionId"/>
         <result property="asker" column="asker"/>

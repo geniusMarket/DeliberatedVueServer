@@ -24,17 +24,28 @@ public interface AnnotationMapper {
 
     /**
      *
-     * @param str
      * @return
      */
-    List<Annotation> selectAnnotationsByString(String str);
+    List<Annotation> selectAllAnnotation();
 
+    /**
+     *
+     * @param moduleName
+     * @return
+     */
+    List<Annotation> selectAnnotationBy(String moduleName);
     /**
      *
      * @param annotation
      */
     void updateAnnotationByObject(Annotation annotation);
 
+    /**
+     *
+     * @param status
+     * @return
+     */
+    List<Annotation> selectAnnotationByStatus(int status);
     /**
      *
      * @param id

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
-public class Article {
+public class Article implements Cloneable{
     public final static int EXAMINING = 0; //审核中
     public final static int EXAMINE_SUCCESS = 1;//审核成功
     public final static int EXAMINE_FAILED = 2;//审核失败
@@ -15,6 +15,7 @@ public class Article {
     private String author;
     private int views=0;
     private int likes=0;
+    private int reward =0;
     private int status = EXAMINING;
     private int codeId;
     public Article(){
@@ -25,6 +26,7 @@ public class Article {
         this.detail = detail;
         this.author = author;
         this.createTime =new Timestamp(new Date().getTime());
+        codeId = 0;
     }
 
     public Article(String title, String detail, String author, int codeId) {
@@ -35,7 +37,7 @@ public class Article {
         this.createTime =new Timestamp(new Date().getTime());
     }
 
-    public Article(int articleId, String title, String detail, Timestamp createTime, String author, int views, int likes, int status, int codeId) {
+    public Article(int articleId, String title, String detail, Timestamp createTime, String author, int views, int likes, int reward, int status, int codeId) {
         this.articleId = articleId;
         this.title = title;
         this.detail = detail;
@@ -43,8 +45,21 @@ public class Article {
         this.author = author;
         this.views = views;
         this.likes = likes;
+        this.reward = reward;
         this.status = status;
         this.codeId = codeId;
+    }
+
+    public static int getEXAMINING() {
+        return EXAMINING;
+    }
+
+    public static int getExamineSuccess() {
+        return EXAMINE_SUCCESS;
+    }
+
+    public static int getExamineFailed() {
+        return EXAMINE_FAILED;
     }
 
     public int getArticleId() {
@@ -103,6 +118,14 @@ public class Article {
         this.likes = likes;
     }
 
+    public int getReward() {
+        return reward;
+    }
+
+    public void setReward(int reward) {
+        this.reward = reward;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -124,12 +147,12 @@ public class Article {
         if (this == o) return true;
         if (!(o instanceof Article)) return false;
         Article article = (Article) o;
-        return articleId == article.articleId && views == article.views && likes == article.likes && status == article.status && codeId == article.codeId && Objects.equals(title, article.title) && Objects.equals(detail, article.detail) && Objects.equals(createTime, article.createTime) && Objects.equals(author, article.author);
+        return articleId == article.articleId && views == article.views && likes == article.likes && reward == article.reward && status == article.status && codeId == article.codeId && Objects.equals(title, article.title) && Objects.equals(detail, article.detail) && Objects.equals(createTime, article.createTime) && Objects.equals(author, article.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(articleId, title, detail, createTime, author, views, likes, status, codeId);
+        return Objects.hash(articleId, title, detail, createTime, author, views, likes, reward, status, codeId);
     }
 
     @Override
@@ -142,8 +165,22 @@ public class Article {
                 ", author='" + author + '\'' +
                 ", views=" + views +
                 ", likes=" + likes +
+                ", reward=" + reward +
                 ", status=" + status +
                 ", codeId=" + codeId +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Article article = null;
+        try {
+            article =(Article) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return  article;
     }
 }

@@ -31,6 +31,12 @@ public interface ArticleMapper {
 
     /**
      *
+     * @param status
+     * @return
+     */
+    List<Article> selectArticleByStatus(int status);
+    /**
+     *
      * @param article
      */
     void updateArticleByObject(Article article);
@@ -40,4 +46,10 @@ public interface ArticleMapper {
      * @param id
      */
     void deleteArticleById(int id);
+
+    /**
+     *
+     * @return
+     */
+    List<Article> selectAllArticle();
 }

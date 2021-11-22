@@ -8,13 +8,16 @@
                                           #{status},#{createTime})
     </insert>
     <select id="selectAnswerReplyById" parameterType="int" resultMap="Reply">
-        select * from `answerReply` where answerReplyId=#{id}
+        select * from `answerReply` where answerReplyId=#{id} and status = 1
     </select>
     <select id="selectAnswerRepliesByAnswerId" parameterType="int" resultMap="Reply">
-        select * from  `answerReply` where answerId=#{answerId}
+        select * from  `answerReply` where answerId=#{answerId} and status = 1
     </select>
     <select id="selectAnswerRepliesByString" parameterType="string" resultMap="Reply">
-        select * from  `answerReply` where detail like "%"#{str}"%"
+        select * from  `answerReply` where detail like "%"#{str}"%" and status = 1
+    </select>
+    <select id="selectAnswerRepliesByStatus" parameterType="int" resultMap="Reply">
+        select * from  `answerReply` where  status = #{status}
     </select>
     <update id="updateAnswerReplyByObject" parameterType="com.example.geniusmarket.pojo.AnswerReply">
         update `answerReply` set detail=#{detail},likes=#{likes},reward=#{reward},status=#{status}
