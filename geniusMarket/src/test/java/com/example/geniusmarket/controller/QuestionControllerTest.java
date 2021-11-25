@@ -69,8 +69,8 @@ class QuestionControllerTest {
     @Transactional
     @Rollback
     void selectQuestion() throws Exception{
-        String json ="{\"type\": 1,\n" +
-                "\"detail\": \"dasd\"}";
+        String json ="{\"type\": 3,\n" +
+                "\"detail\": \"dasd\", \"codeId\":10001}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/selectQuestion").content(json.getBytes())
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

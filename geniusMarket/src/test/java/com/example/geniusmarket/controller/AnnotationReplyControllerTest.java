@@ -54,7 +54,7 @@ class AnnotationReplyControllerTest {
     @Transactional
     @Rollback
     void anoRepLikes() throws Exception{
-        String json = "{\"replyId\": 10018}";
+        String json = "{\"replyId\": 10021}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/annotationReplyLikes").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
@@ -68,7 +68,7 @@ class AnnotationReplyControllerTest {
     void changeAnoRpl() throws  Exception {
         String json = "{\"detail\": \"具体内容\", \n" +
                 "\"userId\": \"safsfsdsad\",\n" +
-                "\"replyId\": 10018}";
+                "\"replyId\": 10021}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/changeAnnotationReply").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

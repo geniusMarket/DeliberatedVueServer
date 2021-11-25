@@ -68,7 +68,7 @@ class AnswerReplyControllerTest {
     @Transactional
     @Rollback
     void addAPL() throws Exception{
-        String json = "{\"answerReplyId\": 2}";
+        String json = "{\"answerReplyId\": 3}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/addAnswerReplyLikes").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

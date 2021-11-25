@@ -52,4 +52,11 @@ public interface QuestionMapper {
      * @param id
      */
    void deleteQuestionById(int id);
+
+    /**
+     *
+     * @param codeId
+     * @return
+     */
+   List<Question> selectQuestionByCodeId(int codeId);
 }

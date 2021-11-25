@@ -93,8 +93,10 @@ public class QuestionController {
             var quesUser = new ArrayList<Data<Question>>();
             if(jsonObject.getIntValue("type")==1)
                 questionList = questionMapper.selectQuestionsByString("%");
-            else
+            else if(jsonObject.getIntValue("type")==2)
                 questionList = questionMapper.selectQuestionsByString(jsonObject.getString("detail"));
+            else
+                questionList = questionMapper.selectQuestionByCodeId(jsonObject.getIntValue("codeId"));
             for(var i:questionList)
             {
                 quesUser.add(new Data<>(i,userMapper.selectUserByOpenId(i.getAsker())));

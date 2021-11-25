@@ -27,6 +27,9 @@
     <select id="selectQuestionByStatus" parameterType="int" resultMap="Question">
         select  * from `question` where status = #{status}
     </select>
+    <select id="selectQuestionByCodeId" parameterType="int" resultMap="Question">
+        select * from `question` where status = 1 and codeId=#{codeId}
+    </select>
     <resultMap id="Question" type="com.example.geniusmarket.pojo.Question">
         <result property="questionId" column="questionId"/>
         <result property="asker" column="asker"/>
