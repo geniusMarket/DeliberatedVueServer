@@ -7,7 +7,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.geniusmarket.dao.*;
 import com.example.geniusmarket.pojo.*;
 import com.example.geniusmarket.utils.Data;
+import com.example.geniusmarket.utils.Dictionary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -94,6 +96,50 @@ public class ConsoleController {
         {
             e.printStackTrace();
             status.put("status","Other Error!");
+        }
+        return (JSONObject) JSONObject.toJSON(status);
+    }
+    @PostMapping("changeStatus/{type}/{id}/{status}")
+    public JSONObject changeStatus(@PathVariable("type")String type,@PathVariable("id")int id,@PathVariable("status")int newStatus)
+    {
+
+        var status = new HashMap<String,Object>();
+        try {
+            switch (Dictionary.pojoHashMap().get(type)) {
+                case 1:
+                    annotationMapper.deleteAnnotationById(id);
+                    break;
+                case 2:
+                    annotationReplyMapper.deleteAnnotationReplyById(id);
+                    break;
+                case 3:
+                    answerMapper.deleteAnswerById(id);
+                    break;
+                case 4:
+                    answerReplyMapper.deleteAnswerReplyById(id);
+                    break;
+                case 5:
+                    articleMapper.deleteArticleById(id);
+                    break;
+                case 6:
+                    articleReplyMapper.deleteArticleReplyById(id);
+                    break;
+                case 7:
+                case 11:
+                case 12:
+                case 9:
+                case 8:
+                    break;
+                case 10:
+                    questionMapper.deleteQuestionById(id);
+                    break;
+            }
+            status.put("status","success");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            status.put("status","dataBase Error");
         }
         return (JSONObject) JSONObject.toJSON(status);
     }

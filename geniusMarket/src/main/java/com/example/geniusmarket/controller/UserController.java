@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.geniusmarket.dao.*;
 import com.example.geniusmarket.pojo.*;
+import com.example.geniusmarket.utils.Data;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -208,17 +209,36 @@ public class UserController {
         var status = new HashMap<String,Object>();
         status.put("status","success");
         try{
-            List<User> users;
+            List<Data<Integer>> users = new ArrayList<>();// 0为互相关注 1为未关注粉丝 2未关注的对象未关注你
             JSONObject jsonObject = JSONObject.parseObject(data);
             int type = jsonObject.getIntValue("type");
             String openId = jsonObject.getString("openId");
             if(type == 1)//查找我的粉丝
             {
-                users = userMapper.selectFansByOpenId(openId);
+                for(var i:userMapper.selectFansByOpenId(openId)){
+                    if(fansMapper.getAFans(openId,i.getOpenId())==null)
+                    {
+                        users.add(new Data<>(1,i));
+                    }
+                    else
+                    {
+                        users.add(new Data<>(0,i));
+                    }
+                }
+
             }
             else  //查找我的关注
             {
-                users = userMapper.selectAttentionsByOpenId(openId);
+                for(var i:userMapper.selectAttentionsByOpenId(openId)){
+                    if(fansMapper.getAFans(i.getOpenId(),openId) == null)
+                    {
+                        users.add(new Data<>(2,i));
+                    }
+                    else
+                    {
+                        users.add(new Data<>(0,i));
+                    }
+                }
             }
             JSONArray array = JSONArray.parseArray(JSON.toJSONString(users));
             status.put("data",array);
@@ -274,6 +294,15 @@ public class UserController {
         }
         return (JSONObject) JSONObject.toJSON(status);
     }
+//    @PostMapping("/judgeAttentionEachOther")
+//    public JSONObject judgeAttentionEachOther(@RequestBody String data)
+//    {
+//        var status = new HashMap<String,Object>();
+//        try
+//        {
+//
+//        }
+//    }
  }
 class MyHistory
 {

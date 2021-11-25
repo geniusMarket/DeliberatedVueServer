@@ -13,7 +13,7 @@
         select * from `user` where  openId in (select fansId from fans where attentionId=#{openId})
     </select>
     <select id="selectAttentionsByOpenId" parameterType="string" resultMap="User">
-        select * from `user` where openId in (select attentionId from fansId=#{openId})
+        select * from `user` where openId in (select attentionId from fans where fansId=#{openId})
     </select>
     <update id="updateUserByObject" parameterType="com.example.geniusmarket.pojo.User">
         update `user` set userInfo = #{userInfo}, attention =#{attention},score=#{score},

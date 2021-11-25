@@ -8,8 +8,8 @@
                                        #{views},#{likes},#{reward},#{createTime},#{status})
     </insert>
     <update id="updateQuestionByObject" parameterType="com.example.geniusmarket.pojo.Question">
-        update `question` set asker=#{asker},title=#{title},detail=#{detail},codeId=#{codeId},
-                              views={views},likes=#{likes},reward=#{reward},status=#{status}
+        update `question` set title=#{title},detail=#{detail},codeId=#{codeId},
+                              views=#{views},likes=#{likes},reward=#{reward},status=#{status}
                                 where questionId=#{questionId}
     </update>
     <select id="selectQuestionById" parameterType="int" resultMap="Question">

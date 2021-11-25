@@ -17,7 +17,7 @@ public class Question implements Cloneable{
     private int likes=0;
     private int reward=0;
     private Timestamp createTime;
-    private int status = EXAMINING;
+    private int status = EXAMINE_SUCCESS;
     public Question()
     {
         createTime = new Timestamp(new Date().getTime());

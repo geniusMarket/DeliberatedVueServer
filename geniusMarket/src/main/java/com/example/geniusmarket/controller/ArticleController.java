@@ -115,5 +115,24 @@ public class ArticleController {
         }
         return (JSONObject) JSONObject.toJSON(status);
     }
+    @PostMapping("/getArticle")
+    public JSONObject getArticle(@RequestBody String data)
+    {
+        var status = new HashMap<String,Object>();
+        try {
+            JSONObject jsonObject = JSONObject.parseObject(data);
+            var article = articleMapper.selectArticleById(jsonObject.getIntValue("articleId"));
+            Data<Article> articleData = new Data<>(article,userMapper.selectUserByOpenId(article.getAuthor()));
+            status.put("status","success");
+            status.put("data",articleData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            status.put("status","error");
+            status.put("data",null);
+        }
+        return (JSONObject) JSONObject.toJSON(status);
+    }
 }
 

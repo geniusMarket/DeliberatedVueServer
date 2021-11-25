@@ -14,7 +14,7 @@ public class AnswerReply implements Cloneable{
     private String detail;
     private int likes=0;
     private int reward=0;
-    private int status=EXAMINING;
+    private int status=EXAMINE_SUCCESS;
     private Timestamp createTime;
     public AnswerReply(int answerId, String replier, String detail, int reward) {
         this.answerId = answerId;

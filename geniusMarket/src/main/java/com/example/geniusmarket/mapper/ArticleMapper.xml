@@ -5,7 +5,7 @@
 <mapper namespace="com.example.geniusmarket.dao.ArticleMapper">
     <insert id="insertArticleByObject" parameterType="com.example.geniusmarket.pojo.Article" useGeneratedKeys="true" keyProperty="articleId">
         insert into `article` values (null,#{title},#{detail},#{createTime},#{author},#{views},#{likes},
-                                      #{status},#{codeId})
+                                      #{status},#{reward},#{codeId})
     </insert>
     <select id="selectArticleById" parameterType="com.example.geniusmarket.pojo.Article" resultMap="Article">
         select * from `article` where articleId=#{id} and status = 1

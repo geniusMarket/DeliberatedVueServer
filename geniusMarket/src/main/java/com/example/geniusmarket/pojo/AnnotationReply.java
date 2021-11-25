@@ -14,7 +14,7 @@ public class AnnotationReply implements Cloneable{
     private String detail;
     private Timestamp createTime;
     private int likes=0;
-    private int status = EXAMINING;
+    private int status = EXAMINE_SUCCESS;
     public AnnotationReply()
     {
         createTime = new Timestamp(new Date().getTime());

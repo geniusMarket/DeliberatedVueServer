@@ -85,6 +85,7 @@ public class AnswerReplyController {
             JSONObject jsonObject = JSONObject.parseObject(data);
             AnswerReply answerReply = answerReplyMapper.selectAnswerReplyById(jsonObject.getIntValue("answerReplyId"));
             answerReply.setLikes(answerReply.getLikes()+1);
+            answerReplyMapper.updateAnswerReplyByObject(answerReply);
             status.put("data",answerReply);
             status.put("status","success");
         }

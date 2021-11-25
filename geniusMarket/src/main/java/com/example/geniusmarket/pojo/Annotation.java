@@ -15,7 +15,7 @@ public class Annotation implements Cloneable{
     private Timestamp createTime;
     private String userId;
     private int likes = 0;
-    private int status = EXAMINING;
+    private int status = EXAMINE_SUCCESS;
     public Annotation(){
         createTime = new Timestamp(new Date().getTime());
     }

@@ -17,7 +17,7 @@
         select * from `annotationReply` where status = #{status}
     </select>
     <update id="updateAnnotationReplyByObject" parameterType="com.example.geniusmarket.pojo.AnnotationReply">
-        update `annotationReply` set detail=#{deatil},likes=#{likes},status=#{status}
+        update `annotationReply` set detail=#{detail},likes=#{likes},status=#{status}
                     where replyId=#{replyId}
     </update>
     <delete id="deleteAnnotationReplyById" parameterType="int">

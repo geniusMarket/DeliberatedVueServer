@@ -39,7 +39,7 @@ public class AnnotationController {
         {
             e.printStackTrace();
             status.put("status","error");
-            status.put("status",null);
+            status.put("data",null);
         }
         return (JSONObject) JSON.toJSON(status);
     }
@@ -52,7 +52,7 @@ public class AnnotationController {
             JSONObject jsonObject = JSON.parseObject(data);
             Annotation annotation = annotationMapper.selectAnnotationById(jsonObject.getIntValue("annotationId"));
             annotation.setDetail(jsonObject.getString("detail"));
-            annotationMapper.insertAnnotationByObject(annotation);
+            annotationMapper.updateAnnotationByObject(annotation);
             status.put("status","success");
             status.put("data",annotation);
         }
@@ -60,7 +60,7 @@ public class AnnotationController {
         {
             e.printStackTrace();
             status.put("status","error");
-            status.put("status",null);
+            status.put("data",null);
         }
         return (JSONObject) JSON.toJSON(status);
     }

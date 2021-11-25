@@ -16,7 +16,7 @@ public class Article implements Cloneable{
     private int views=0;
     private int likes=0;
     private int reward =0;
-    private int status = EXAMINING;
+    private int status = EXAMINE_SUCCESS;
     private int codeId;
     public Article(){
         this.createTime =new Timestamp(new Date().getTime());

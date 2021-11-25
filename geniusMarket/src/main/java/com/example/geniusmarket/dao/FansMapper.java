@@ -27,4 +27,12 @@ public interface FansMapper {
      * @return
      */
     List<Fans> selectFans(String openId);
+
+    /**
+     *
+     * @param fansId
+     * @param attentionId
+     * @return
+     */
+    Fans getAFans(String fansId,String attentionId);
 }

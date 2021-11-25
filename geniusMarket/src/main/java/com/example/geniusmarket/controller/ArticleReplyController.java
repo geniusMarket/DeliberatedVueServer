@@ -21,7 +21,7 @@ public class ArticleReplyController {
     ArticleReplyMapper articleReplyMapper;
     @Autowired
     UserMapper userMapper;
-    @PostMapping("/addReply")//帖子评论
+    @PostMapping("/addArticleReply")//帖子评论
     public JSONObject addReply(@RequestBody String data){
         var status = new HashMap<String,Object>();
         try
@@ -30,7 +30,7 @@ public class ArticleReplyController {
             var articleID = myData.getIntValue("articleId");
             var detail =myData.getString("detail");
             var replier =myData.getString("replier");
-            var myReply=new ArticleReply(articleID,detail, replier);
+            var myReply=new ArticleReply(articleID,replier,detail);
             articleReplyMapper.insertArticleReplyByObject(myReply);
             status.put("status","success");
             status.put("data",myReply);
@@ -43,7 +43,7 @@ public class ArticleReplyController {
         }
         return  (JSONObject) JSONObject.toJSON(status);
     }
-    @PostMapping("/ArticleReplyLikes")
+    @PostMapping("/articleReplyLikes")
     public JSONObject ArticleReplyLikes(@RequestBody String data)
     {
         Map<String,Object> status = new HashMap<>();
@@ -62,7 +62,7 @@ public class ArticleReplyController {
             return (JSONObject) JSONObject.toJSON(status);
         }
     }
-    @PostMapping("/delReply")//删除帖子评论
+    @PostMapping("/delArticleReply")//删除帖子评论
     public JSONObject delReply(@RequestBody String data){
         var status = new HashMap<String,Object>();
         try
@@ -78,10 +78,7 @@ public class ArticleReplyController {
         }
         return  (JSONObject) JSONObject.toJSON(status);
     }
-    @PostMapping("" +
-            "" +
-            "" +
-            "")//显示评论
+    @PostMapping("/articleReplies")//显示评论
     public JSONObject replies(@RequestBody String data)
     {
         var status = new HashMap<String,Object>();

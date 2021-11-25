@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.geniusmarket.dao.AnswerReplyMapper">
     <insert id="insertAnswerReplyByObject" parameterType="com.example.geniusmarket.pojo.AnswerReply" useGeneratedKeys="true" keyProperty="answerReplyId">
-        insert into `answerReply` values (null,#{answerid},#{replier},#{detail},#{likes},#{reward},
+        insert into `answerReply` values (null,#{answerId},#{replier},#{detail},#{likes},#{reward},
                                           #{status},#{createTime})
     </insert>
     <select id="selectAnswerReplyById" parameterType="int" resultMap="Reply">

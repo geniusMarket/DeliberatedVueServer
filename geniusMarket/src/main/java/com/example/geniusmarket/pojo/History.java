@@ -13,6 +13,7 @@ public class History implements Cloneable{
     public History(String userId, int questionId) {
         this.userId = userId;
         this.questionId = questionId;
+        createTime = new Timestamp(new Date().getTime());
     }
 
     public String getUserId() {

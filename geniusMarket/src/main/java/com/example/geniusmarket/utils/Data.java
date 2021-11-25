@@ -4,7 +4,7 @@ import com.example.geniusmarket.pojo.User;
 
 import java.util.Objects;
 
-public class Data <T extends Cloneable>{
+public class Data <T>{
     private T data;
     private User user;
     String type;

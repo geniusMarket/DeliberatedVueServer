@@ -15,7 +15,8 @@ public class Answer implements Cloneable {
     private Timestamp createTime;
     private int likes =0;
     private int reward = 0;
-    private int status = EXAMINING;
+    private int status = EXAMINE_SUCCESS;
+
     public Answer()
     {
         createTime = new Timestamp(new Date().getTime());
