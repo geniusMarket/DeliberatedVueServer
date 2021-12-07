@@ -23,6 +23,12 @@
     <delete id="deleteAnnotationReplyById" parameterType="int">
         delete from `annotationReply` where replyId=#{id}
     </delete>
+    <update id="setStatus" parameterType="int">
+        update `annotationReply` set status=#{status} where replyId=#{id}
+    </update>
+    <select id="verify" resultMap="Reply">
+        select * from `annotationReply` where status in (0,2,3)
+    </select>
     <resultMap id="Reply" type="com.example.geniusmarket.pojo.AnnotationReply">
         <result property="replyId" column="replyId"/>
         <result property="userId" column="userId"/>

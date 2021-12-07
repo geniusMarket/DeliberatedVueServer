@@ -7,7 +7,9 @@ import java.util.Objects;
 public class Question implements Cloneable{
     public final static int EXAMINING = 0; //审核中
     public final static int EXAMINE_SUCCESS = 1;//审核成功
-    public final static int EXAMINE_FAILED = 2;//审核失败
+    public final static int EXAMINE_FAILED = 4;//审核失败
+    public final static int DANGEROUS = 2;
+    public final static int SAFE = 3;
     private  int questionId;
     private String asker;
     private String title;
@@ -18,6 +20,7 @@ public class Question implements Cloneable{
     private int reward=0;
     private Timestamp createTime;
     private int status = EXAMINE_SUCCESS;
+    private int accept=-1;
     public Question()
     {
         createTime = new Timestamp(new Date().getTime());
@@ -40,7 +43,7 @@ public class Question implements Cloneable{
         createTime = new Timestamp(new Date().getTime());
     }
 
-    public Question(int questionId, String asker, String title, String detail, int codeId, int views, int likes, int reward, Timestamp createTime, int status) {
+    public Question(int questionId, String asker, String title, String detail, int codeId, int views, int likes, int reward, Timestamp createTime, int status, int accept) {
         this.questionId = questionId;
         this.asker = asker;
         this.title = title;
@@ -51,6 +54,7 @@ public class Question implements Cloneable{
         this.reward = reward;
         this.createTime = createTime;
         this.status = status;
+        this.accept = accept;
     }
 
     public int getQuestionId() {
@@ -133,17 +137,12 @@ public class Question implements Cloneable{
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Question)) return false;
-        Question question = (Question) o;
-        return questionId == question.questionId && codeId == question.codeId && views == question.views && likes == question.likes && status == question.status && Objects.equals(asker, question.asker) && Objects.equals(title, question.title) && Objects.equals(detail, question.detail) && Objects.equals(createTime, question.createTime);
+    public int getAccept() {
+        return accept;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(questionId, asker, title, detail, codeId, views, likes, createTime, status);
+    public void setAccept(int accept) {
+        this.accept = accept;
     }
 
     @Override
@@ -156,9 +155,24 @@ public class Question implements Cloneable{
                 ", codeId=" + codeId +
                 ", views=" + views +
                 ", likes=" + likes +
+                ", reward=" + reward +
                 ", createTime=" + createTime +
                 ", status=" + status +
+                ", accept=" + accept +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Question)) return false;
+        Question question = (Question) o;
+        return questionId == question.questionId && codeId == question.codeId && views == question.views && likes == question.likes && reward == question.reward && status == question.status && accept == question.accept && Objects.equals(asker, question.asker) && Objects.equals(title, question.title) && Objects.equals(detail, question.detail) && Objects.equals(createTime, question.createTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(questionId, asker, title, detail, codeId, views, likes, reward, createTime, status, accept);
     }
 
     @Override

@@ -7,7 +7,9 @@ import java.util.Objects;
 public class ArticleReply implements Cloneable{
     public final static int EXAMINING = 0; //审核中
     public final static int EXAMINE_SUCCESS = 1;//审核成功
-    public final static int EXAMINE_FAILED = 2;//审核失败
+    public final static int EXAMINE_FAILED = 4;//审核失败
+    public final static int DANGEROUS = 2;
+    public final static int SAFE = 3;
     private int articleReplyId;
     private int articleId;
     private String replier;

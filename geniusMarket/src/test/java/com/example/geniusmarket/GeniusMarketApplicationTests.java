@@ -2,17 +2,18 @@ package com.example.geniusmarket;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.geniusmarket.dao.*;
-import com.example.geniusmarket.pojo.*;
-import com.example.geniusmarket.utils.Data;
+import com.example.geniusmarket.pojo.LikesRecord;
+import com.example.geniusmarket.utils.Dictionary;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GeniusMarketApplicationTests {
 	@Autowired
 	AnnotationMapper annotationMapper;
@@ -38,10 +39,12 @@ class GeniusMarketApplicationTests {
 	SourceCodeMapper sourceCodeMapper;
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	LikesRecordMapper likesRecordMapper;
 	@Test
+	@Rollback
 	void contextLoads() {
-		Data<Integer>data = new Data<>(1,new User());
-		System.out.println(JSONObject.toJSON(data));
+		System.out.println(questionMapper.selectQuestionById(10052));
 	}
 }
 

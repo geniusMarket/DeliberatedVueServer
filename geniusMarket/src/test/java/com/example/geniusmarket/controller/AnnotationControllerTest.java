@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GeniusMarketApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AnnotationControllerTest {
 
     @Autowired
@@ -68,10 +69,11 @@ class AnnotationControllerTest {
     @Transactional
     @Rollback
     void annotationLikes() throws Exception{
-        String json = "{\"detail\": \"修改后容\",\n" +
-                "\"annotationId\": 10033}";
+        String json = "{\"annotationId\": 10042,\n" +
+                "\"openId\": \"fans_123\",\n" +
+                "\"type\": 1}";
         System.out.println(json);
-        var res=mockMvc.perform(MockMvcRequestBuilders.post("/changeAnnotation").content(json.getBytes(StandardCharsets.UTF_8))
+        var res=mockMvc.perform(MockMvcRequestBuilders.post("/annotationLikes").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
         res.andExpect(MockMvcResultMatchers.status().isOk());
         res.andDo(MockMvcResultHandlers.print());
@@ -94,7 +96,7 @@ class AnnotationControllerTest {
     @Rollback
     void selectAnnotation() throws Exception{
         String json = "{\"moduleName\": \"src\\\\\\\\asfsad\\\\\\\\safsadsa\\\\\\\\dfdasds.js\",\n" +
-                "\"type\": \"all\"}";
+                "\"type\": \"all\",\"openId\": \"fans_123\"}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/selectAnnotation").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

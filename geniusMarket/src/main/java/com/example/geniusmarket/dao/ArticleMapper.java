@@ -1,5 +1,6 @@
 package com.example.geniusmarket.dao;
 
+import com.example.geniusmarket.pojo.Annotation;
 import com.example.geniusmarket.pojo.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -52,4 +53,23 @@ public interface ArticleMapper {
      * @return
      */
     List<Article> selectAllArticle();
+
+    /**
+     *
+     * @param id
+     * @param status
+     */
+    void setStatus(int id,int status);
+    /**
+     *
+     * @return
+     */
+    List<Article> verify();
+
+    /**
+     *
+     * @param author
+     * @return
+     */
+    List<Article> selectArticleByAuthor(String author);
 }

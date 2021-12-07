@@ -29,6 +29,12 @@
     <delete id="deleteAnswerById" parameterType="int">
         delete from `answer` where answerId=#{id}
     </delete>
+    <update id="setStatus" parameterType="int">
+        update `answer` set status=#{status} where answerId=#{id}
+    </update>
+    <select id="verify" resultMap="Answer">
+        select * from `answer` where status!=1 and status in (0,2,3)
+    </select>
     <resultMap id="Answer" type="com.example.geniusmarket.pojo.Answer">
         <result property="answerId" column="answerId"/>
         <result property="answerer" column="answerer"/>

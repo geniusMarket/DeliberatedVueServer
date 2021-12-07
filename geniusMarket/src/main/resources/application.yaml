@@ -4,6 +4,11 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: geniusMrket
     password: geniusMrket12345
+    thymeleaf:
+      cache: false
+    web:
+      resources:
+        static-locations: /www/wwwroot/gm/picture/
 mybatis:
   mapper-locations: classpath*:com/example/geniusmarket/mapper/*.xml
   type-aliases-package: com.example.geniusmarket.pojo
@@ -14,3 +19,6 @@ server:
       key-store: ssl.pfx
       key-store-password: 0RTSUL2f
       key-store-type: PKCS12
+uploadFile:
+  resourceHandler: /getPicture/**   #请求 url 中的资源映射
+  location: /www/wwwroot/gm/picture/ #自定义上传文件本地保存路径

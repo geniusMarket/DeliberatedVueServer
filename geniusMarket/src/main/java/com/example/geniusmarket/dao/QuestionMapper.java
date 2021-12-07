@@ -1,5 +1,6 @@
 package com.example.geniusmarket.dao;
 
+import com.example.geniusmarket.pojo.Annotation;
 import com.example.geniusmarket.pojo.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -59,4 +60,23 @@ public interface QuestionMapper {
      * @return
      */
    List<Question> selectQuestionByCodeId(int codeId);
+
+    /**
+     *
+     * @param id
+     * @param status
+     */
+    void setStatus(int id,int status);
+    /**
+     *
+     * @return
+     */
+    List<Question> verify();
+
+    /**
+     *
+     * @param id
+     * @param accept
+     */
+    void accepted(int id,int accept);
 }

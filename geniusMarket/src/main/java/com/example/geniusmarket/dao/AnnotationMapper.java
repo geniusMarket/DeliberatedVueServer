@@ -52,4 +52,16 @@ public interface AnnotationMapper {
      */
     void deleteAnnotationById(int id);
 
+    /**
+     *
+     * @param id
+     * @param status
+     */
+    void setStatus(int id,int status);
+
+    /**
+     *
+     * @return
+     */
+    List<Annotation> verify();
 }

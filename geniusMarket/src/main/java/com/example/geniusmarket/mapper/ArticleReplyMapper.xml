@@ -14,7 +14,7 @@
         select * from `articleReply` where  status = #{status}
     </select>
     <select id="selectArticleReplyById" parameterType="int" resultMap="Reply">
-        select  * from `articleReply` where articleReplyId=#{id}
+        select  * from `articleReply` where articleReplyId=#{id} and status= 1
     </select>
     <update id="updateArticleReplyByObject" parameterType="com.example.geniusmarket.pojo.ArticleReply">
         update `articleReply` set replier=#{replier},detail=#{detail},views=#{views},likes=#{likes},status=#{status}
@@ -26,8 +26,14 @@
     <update id="addLikes" parameterType="int">
         update `articleReply` set likes = likes+1 where  articleReplyId = #{replyId}
     </update>
+    <update id="setStatus" parameterType="int">
+        update `articleReply` set status=#{status} where articleReplyId=#{id}
+    </update>
+    <select id="verify" resultMap="Reply">
+        select * from `articleReply` where status in (0,2,3)
+    </select>
     <resultMap id="Reply" type="com.example.geniusmarket.pojo.ArticleReply">
-        <result property="articleReplyId" column="articleReply"/>
+        <result property="articleReplyId" column="articleReplyId"/>
         <result property="articleId" column="articleId"/>
         <result property="replier" column="replier"/>
         <result property="detail" column="detail"/>

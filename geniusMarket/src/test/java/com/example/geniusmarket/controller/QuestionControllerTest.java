@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GeniusMarketApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class QuestionControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -73,6 +74,17 @@ class QuestionControllerTest {
                 "\"detail\": \"dasd\", \"codeId\":10001}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/selectQuestion").content(json.getBytes())
+                .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
+        res.andExpect(MockMvcResultMatchers.status().isOk());
+        res.andDo(MockMvcResultHandlers.print());
+    }
+    @Test
+    @Transactional
+    @Rollback
+    void questionIsAccept() throws Exception{
+        String json ="{questionId: 10052}";
+        System.out.println(json);
+        var res=mockMvc.perform(MockMvcRequestBuilders.post("/getQuestionIsAccept").content(json.getBytes())
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
         res.andExpect(MockMvcResultMatchers.status().isOk());
         res.andDo(MockMvcResultHandlers.print());

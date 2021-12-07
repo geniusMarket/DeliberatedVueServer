@@ -27,8 +27,17 @@
     <select id="selectAllArticle" resultMap="Article">
         select * from  article where  status = 1
     </select>
+    <update id="setStatus" parameterType="int">
+        update `article` set status=#{status} where articleId=#{id}
+    </update>
+    <select id="verify" resultMap="Article">
+        select * from `article`  where status in (0,2,3)
+    </select>
+    <select id="selectArticleByAuthor" parameterType="string" resultMap="Article">
+        select * from `article` where author = #{author}
+    </select>
     <resultMap id="Article" type="com.example.geniusmarket.pojo.Article">
-        <result property="articleId" column="articleID"/>
+        <result property="articleId" column="articleId"/>
         <result property="title" column="title"/>
         <result property="detail" column="detail"/>
         <result property="createTime" column="createTime"/>

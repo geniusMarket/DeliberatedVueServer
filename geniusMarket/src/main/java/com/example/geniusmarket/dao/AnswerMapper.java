@@ -1,5 +1,6 @@
 package com.example.geniusmarket.dao;
 
+import com.example.geniusmarket.pojo.Annotation;
 import com.example.geniusmarket.pojo.Answer;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -56,4 +57,16 @@ public interface AnswerMapper {
      * @param id
      */
     void deleteAnswerById(int id);
+
+    /**
+     *
+     * @param id
+     * @param status
+     */
+    void setStatus(int id,int status);
+    /**
+     *
+     * @return
+     */
+    List<Answer> verify();
 }

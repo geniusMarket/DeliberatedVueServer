@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.geniusmarket.dao.LikesRecordMapper">
+    <insert id="insertRecord" parameterType="com.example.geniusmarket.pojo.LikesRecord">
+        insert into `likesrecord` values (#{openId},#{tid},#{type})
+    </insert>
+    <delete id="deleteRecord" parameterType="com.example.geniusmarket.pojo.LikesRecord">
+        delete from `likesrecord`  where openid=#{openId} and tid=#{tid} and type=#{type}
+    </delete>
+
+    <select id="recordIsExists" parameterType="com.example.geniusmarket.pojo.LikesRecord" resultType="boolean">
+        select count(*) from `likesrecord` where openid=#{openId} and tid=#{tid} and type=#{type}
+    </select>
+    <delete id="deleteRecords" parameterType="int" >
+        delete from `likesrecord` where tid=#{tid} and type=#{type}
+    </delete>
+ <resultMap id="Record" type="com.example.geniusmarket.pojo.LikesRecord">
+     <result property="openId" column="openid"/>
+     <result property="tid" column="tid"/>
+     <result property="type" column="type"/>
+ </resultMap>
+</mapper>

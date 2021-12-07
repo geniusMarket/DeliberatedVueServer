@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GeniusMarketApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ArticleControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -52,13 +53,11 @@ class ArticleControllerTest {
     @Transactional
     @Rollback
     void articleLikes() throws Exception{
-        String json = "{\"author\":\"DSAsddad\",\n" +
-                "\"title\": \"sdsa\",\n" +
-                "\"detail\": \"具体内容\", \n" +
-                "\"codeId\": 10001,\n" +
+        String json = "{\"articleId\": 10001，\n" +
+                "\"openId\": \"fans_123\",\n" +
                 "\"type\": 1}";
         System.out.println(json);
-        var res=mockMvc.perform(MockMvcRequestBuilders.post("/addArticle").content(json.getBytes())
+        var res=mockMvc.perform(MockMvcRequestBuilders.post("/articleLikes").content(json.getBytes())
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
         res.andExpect(MockMvcResultMatchers.status().isOk());
         res.andDo(MockMvcResultHandlers.print());
@@ -69,7 +68,7 @@ class ArticleControllerTest {
     @Rollback
     void articles() throws Exception{
         String json = "{\"type\": \"all\",\n" +
-                "\"request\": \"asdsad\"}";
+                "\"request\": \"asdsad\",\"openId\": \"fans_123\"}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/selectArticles").content(json.getBytes())
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
@@ -93,7 +92,7 @@ class ArticleControllerTest {
     @Transactional
     @Rollback
     void getArticle() throws Exception{
-        String json = "{\"articleId\": 10020}";
+        String json = "{\"articleId\": 10023,\"openId\": \"fans_123\"}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/getArticle").content(json.getBytes())
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GeniusMarketApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AnnotationReplyControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -54,7 +55,9 @@ class AnnotationReplyControllerTest {
     @Transactional
     @Rollback
     void anoRepLikes() throws Exception{
-        String json = "{\"replyId\": 10021}";
+        String json = "{\"replyId\": 10033,\n" +
+                "\"openId\": \"fans_123\",\n" +
+                "\"type\": 1}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/annotationReplyLikes").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
@@ -80,7 +83,8 @@ class AnnotationReplyControllerTest {
     @Transactional
     @Rollback
     void select() throws Exception{
-        String json = "{\"annotationId\": 10002}";
+        String json = "{\"annotationId\": 10033,\n" +
+                "\"openId\": \"fans_123\"}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/selectAnnotationReply").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

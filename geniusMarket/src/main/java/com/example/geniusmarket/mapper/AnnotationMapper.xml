@@ -24,9 +24,15 @@
         update `annotation` set filePath=#{filePath},moduleName=#{moduleName},detail=#{detail},
                                 likes=#{likes},status=#{status} where annotationId=#{annotationId}
     </update>
+    <update id="setStatus" parameterType="int">
+        update `annotation` set status=#{status} where annotationId=#{id}
+    </update>
     <delete id="deleteAnnotationById" parameterType="int">
         delete from `annotation` where annotationId=#{id}
     </delete>
+    <select id="verify" resultMap="Annotation">
+        select * from `annotation` where status in (0,2,3)
+    </select>
     <resultMap id="Annotation" type="com.example.geniusmarket.pojo.Annotation">
         <result property="annotationId" column="annotationId"/>
         <result property="filePath" column="filePath"/>

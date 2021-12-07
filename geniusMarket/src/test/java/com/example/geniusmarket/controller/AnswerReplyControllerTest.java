@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GeniusMarketApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AnswerReplyControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -68,7 +69,8 @@ class AnswerReplyControllerTest {
     @Transactional
     @Rollback
     void addAPL() throws Exception{
-        String json = "{\"answerReplyId\": 3}";
+        String json = "{\"answerReplyId\": 3,\"openId\": \"fans_123\",\n" +
+                "\"type\": 1}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/addAnswerReplyLikes").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));
@@ -80,7 +82,7 @@ class AnswerReplyControllerTest {
     @Transactional
     @Rollback
     void selectAPL() throws Exception{
-        String json = "{\"answerId\": 10004}";
+        String json = "{\"answerId\": 10004,\"openId\": \"fans_123\"}";
         System.out.println(json);
         var res=mockMvc.perform(MockMvcRequestBuilders.post("/selectAnswerReply").content(json.getBytes(StandardCharsets.UTF_8))
                 .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE));

@@ -13,11 +13,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -26,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin
 public class UserController {
     @Autowired
     UserMapper userMapper;
@@ -37,6 +36,8 @@ public class UserController {
     FavoriteMapper favoriteMapper;
     @Autowired
     FansMapper fansMapper;
+    @Autowired
+    ArticleMapper articleMapper;
     private final String appIdLocal = "wxfd487c0b4621b54f";
     private final String appId ="wxb9cbbbf20877369d";
     private final String appSecretLocal = "92b1d5c833b7cbaf01bdd5f6a4a97ce8";
@@ -274,14 +275,17 @@ public class UserController {
         return (JSONObject) JSONObject.toJSON(status);
     }
     @PostMapping("addScore")
-    public JSONObject addScore(@RequestBody String data)
+    public JSONObject addScore(@RequestBody String data)//type 1加分 2减分
     {
         var status = new HashMap<String,Object>();
         try
         {
             JSONObject jsonObject = JSONObject.parseObject(data);
             User user = userMapper.selectUserByOpenId(jsonObject.getString("openId"));
+            if(jsonObject.getIntValue("type")==1)
             user.setScore(user.getScore()+jsonObject.getIntValue("reward"));
+            else
+                user.setScore(user.getScore()-jsonObject.getIntValue("reward"));
             userMapper.updateUserByObject(user);
             status.put("status","success");
             status.put("data",user);
@@ -303,6 +307,40 @@ public class UserController {
 //
 //        }
 //    }
+    @PostMapping("myArticle")
+    public JSONObject myArticle(@RequestBody String data)
+    {
+        JSONObject status = new JSONObject();
+        try {
+            JSONObject jsonObject = JSONObject.parseObject(data);
+            var list = articleMapper.selectArticleByAuthor(jsonObject.getString("openId"));
+            status.put("data",list);
+            status.put("status","success");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            status.put("status","error");
+        }
+            return status;
+    }
+    @PostMapping("/getScore")
+    public JSONObject getScore(@RequestBody String data)
+    {
+        JSONObject status = new JSONObject();
+        try
+        {
+            JSONObject jsonObject=JSONObject.parseObject(data);
+            var openId = jsonObject.getString("openId");
+            var user = userMapper.selectUserByOpenId(openId);
+            status.put("score",user.getScore());
+            status.put("status","success");
+        }
+        catch (Exception e)
+        {
+            status.put("status","error");
+        }
+        return status;
+    }
  }
 class MyHistory
 {
